@@ -11,16 +11,19 @@ jobs:
       - name: List all apps
         run: |
           mdfind "kMDItemKind == 'Application'" | grep -i safari
-      # - name: Checkout
-      #   uses: actions/checkout@v4
-      # - name: Set up Node.js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version-file: .node-version
-      # - name: Safari
-      #   uses: cypress-io/github-action@v6
-      #   timeout-minutes: 10
-      #   with:
-      #     build: npm run build
-      #     start: npm start
-      #     browser: safari
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - name: install webkit
+        run: |-
+          npm install playwright-webkit
+      - name: Safari
+        uses: cypress-io/github-action@v6
+        timeout-minutes: 10
+        with:
+          build: npm run build
+          start: npm start
+          browser: webkit
