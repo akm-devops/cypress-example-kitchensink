@@ -1,6 +1,8 @@
 name: Safari
 
-on: [push, workflow_dispatch]
+on: # [push, workflow_dispatch]
+  # - push
+  - workflow_dispatch
 
 jobs:
   chrome:
