@@ -5,12 +5,12 @@ on: # [push, workflow_dispatch]
   - workflow_dispatch
 
 jobs:
-  chrome:
+  Safari:
     runs-on: macos-latest
     steps:
       - name: List all apps
         run: |
-          mdfind "kMDItemKind == 'Application'"
+          mdfind "kMDItemKind == 'Application'" | grep -i safari
       # - name: Checkout
       #   uses: actions/checkout@v4
       # - name: Set up Node.js
