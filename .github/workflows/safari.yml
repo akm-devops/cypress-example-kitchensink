@@ -5,25 +5,35 @@ on: # [push, workflow_dispatch]
   - workflow_dispatch
 
 jobs:
-  Safari:
+  # Safari:
+  #   runs-on: macos-latest
+  #   steps:
+  #     - name: Set up Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version-file: .node-version
+  #     - name: install webkit
+  #       run: |-
+  #         npm install playwright-webkit
+  #     - name: Safari
+  #       uses: cypress-io/github-action@v6
+  #       timeout-minutes: 10
+  #       with:
+  #         build: npm run build
+  #         start: npm start
+  #         browser: webkit
+
+  Webkit:
     runs-on: macos-latest
     steps:
-      - name: List all apps
-        run: |
-          mdfind "kMDItemKind == 'Application'" | grep -i safari
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
-      - name: install webkit
-        run: |-
-          npm install playwright-webkit
-      - name: Safari
+          
+      - name: Cypress run
         uses: cypress-io/github-action@v6
-        timeout-minutes: 10
         with:
-          build: npm run build
-          start: npm start
           browser: webkit
+          record: true
+          build: npm install playwright-webkit
+          # parallel: true
+          # group: 'Parallel browsers'
