@@ -1,12 +1,28 @@
 name: Chrome
 
-on: # [push, workflow_dispatch]
-  # - push
-  - workflow_dispatch
+# on: # [push, workflow_dispatch]
+#   # - push
+#   - workflow_dispatch:
+
+on:
+  # push:
+  #   branches:
+  #     - main
+  workflow_dispatch:
+    inputs:
+      arc_name:
+        description: 'Target ARC name used for `runs-on` in job'
+        default: ubuntu-latest
+
+# jobs:
+#   # test-connection-1:
+#   #   runs-on:
+#   #     - ${{ inputs.arc_name }}
 
 jobs:
   chrome:
-    runs-on: ubuntu-24.04
+    runs-on:
+      - ${{ inputs.arc_name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
